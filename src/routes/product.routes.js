@@ -1,4 +1,5 @@
 const express = require('express');
+const Authmiddleware = require('../middlewares/Authmiddleware');
 const ProductRouter = express.Router();
 const {ProductModel} = require('../models');
 ProductRouter.get('/',async(req,res)=>{
@@ -23,7 +24,7 @@ ProductRouter.get('/:id',async(req,res)=>{
         res.status(501).send(error.message)
     }
 })
-ProductRouter.post('/',async(req,res)=>{
+ProductRouter.post('/',Authmiddleware,async(req,res)=>{
     try {
         const product = new ProductModel(req.body);
         await product.save();
