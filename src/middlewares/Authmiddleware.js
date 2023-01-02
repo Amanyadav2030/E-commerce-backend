@@ -10,6 +10,7 @@ async function Authmiddleware(req,res,next){
         const {id} = verification;
         let check = await UserModel.findById(id);
         if(check){
+            req.user = id;
             next();
         }else{
             res.status(401).send("User not authenticated");
