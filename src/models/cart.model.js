@@ -5,7 +5,8 @@ const cartSchema = mongoose.Schema({
     userId:{ required:true, type: mongoose.Schema.Types.ObjectId, ref: 'user' },
     productId:{required:true, type: mongoose.Schema.Types.ObjectId, ref: 'product' },
     total:{type:Number,required:true},
-    sold:{type:Boolean,default:false}
+    sold:{type:Boolean,default:false},
+    deliveredDate: {type: Date}
 },{
         versionKey: false,
         timestamps: {

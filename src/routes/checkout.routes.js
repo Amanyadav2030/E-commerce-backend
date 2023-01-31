@@ -29,9 +29,10 @@ CheckoutRouter.patch('/:id',Authmiddleware,async(req,res)=>{
     try {
         const {id} = req.params;
         const {cartId} = req.body;
-        console.log("hello")
+        const todate = new Date();
+        let newdate = todate.setDate(todate.getDate() + 3);
         for(cart of cartId){
-            await CartModel.findByIdAndUpdate(cart,{sold:true});
+            await CartModel.findByIdAndUpdate(cart,{sold:true,deliveredDate:new Date(newdate)});
          }
          const updateCheckout = await CheckoutModel.findByIdAndUpdate(id,{status:true});
          res.send(updateCheckout);
